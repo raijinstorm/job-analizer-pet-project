@@ -117,7 +117,7 @@ def main():
     parser.add_argument("--search", required=True)
     args = parser.parse_args()
     
-    df = fetch_data(search=args.search, timeout=1000, limit=1000)
+    df = fetch_data(search=args.search, timeout=10000, category="Software Development")
     
     df = transform(df)
     
