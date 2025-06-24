@@ -1,1 +1,1 @@
-# jop-analizer-pet-project
+# job-analizer-pet-project

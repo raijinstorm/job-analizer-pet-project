@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html><head><title>Job Dashboard</title></head><body>
+<h1>Top Locations</h1>
+<ul>
+  {% for loc, count in locations.items() %}
+    <li>{{ loc }}: {{ count }}</li>
+  {% endfor %}
+</ul>
+</body></html>
