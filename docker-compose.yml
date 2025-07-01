@@ -1,16 +1,38 @@
-version: '3.8'
 services:
   db:
     image: postgres:15
     container_name: pg-jobs
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: jobs
+      POSTGRES_USER: "${PG_USER}"
+      POSTGRES_PASSWORD: "${PG_PASSWORD}"
+      POSTGRES_DB: "${PG_DB}"
     ports:
-      - "5433:5432"
+      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  web:
+    build:
+      context: .
+    container_name: jobs-web
+    env_file:
+      - .env
+    depends_on:
+      - db
+    ports:
+      - "8501:8501"
+    command: streamlit run app.py  --server.address=0.0.0.0
+
+  scheduler:
+    build:
+      context: .
+    container_name: jobs-scheduler
+    env_file:
+      - .env
+    depends_on:
+      - db
+    command: python scheduler.py
+    restart: always
 
 volumes:
   pgdata:
