@@ -13,7 +13,6 @@ def run_all_searches():
 schedule.every().day.at("03:00").do(run_all_searches)
 
 if __name__ == "__main__":
-    # while True:
-    #     schedule.run_pending()
-    #     time.sleep(5)
-    run_all_searches()
+    while True:
+        schedule.run_pending()
+        time.sleep(60*60)
